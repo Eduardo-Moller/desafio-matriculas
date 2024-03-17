@@ -1,0 +1,13 @@
+# WEB
+
+web/node_modules
+web/.pnp
+web.pnp.js
+web/.env.
+
+# API
+api/node_modules
+api/.prettierrc
+api/.eslintrc
+api/.env
+
