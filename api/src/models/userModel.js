@@ -15,7 +15,7 @@ async function getUserById(userId) {
     const userResult = await query(getUserQuery);
 
     if (isEmpty(userResult)) return {};
-   
+
     return userResult[0];
 }
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../../controllers/authController');
+const { verifyJwt } = require('../../middlewares/authMiddleware');
 
 /**
  * Rota para login de usuário.
@@ -45,6 +46,21 @@ router.post('/register', async (req, res) => {
         }
     } else {
         res.status(400).json({ error: true, message: 'Bad Request' });
+    }
+});
+
+/**
+ * Rota para validação de token.
+ *
+ * @route GET /auth/validate/token
+ * @group Auth - Operações de Autenticação
+ * @returns {object} 200 - Token válido
+ */
+router.get('/rest/token', async (req, res) => {
+    const tokenDecoded = await verifyJwt(req, res);
+    if (tokenDecoded) {
+        const token = authController.createToken(tokenDecoded.id);
+        res.status(200).json({ newToken: token });
     }
 });
 

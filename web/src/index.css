@@ -4,3 +4,21 @@
   box-sizing: border-box;
   font-family: sans-serif;
 }
+
+.bgPrimaryUni {
+  background-color: #21409a !important;
+  border: 0px !important;
+}
+
+.textPrimaryUni {
+  color: #21409a !important;
+}
+
+.text-white {
+  color: #ffffff !important;
+}
+
+.invalid-text-entry {
+  color: #ff0000;
+  font-size: 12px;
+}

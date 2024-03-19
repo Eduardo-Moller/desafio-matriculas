@@ -8,4 +8,8 @@ async function register(body) {
     return await authModel.register(body);
 }
 
-module.exports = { login, register };
+function createToken(id) {
+    return authModel.createToken(id);
+}
+
+module.exports = { login, register, createToken };

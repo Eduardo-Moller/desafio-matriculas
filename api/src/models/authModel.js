@@ -11,7 +11,7 @@ async function login(userData) {
     if (isEmpty(retrievedUser)) return { auth: false };
     const isValidPassword = bcrypt.compareSync(password, retrievedUser.password);
     if (!isEmpty(retrievedUser) && isValidPassword) {
-        const token = jwt.sign({ id: retrievedUser.id }, process.env.JWT_SECRET, { expiresIn: 3600 });
+        const token = await createToken(retrievedUser.id);
         const authenticatedUser = await getUserById(retrievedUser.id);
         return { auth: true, token, user: authenticatedUser };
     } else {
@@ -30,4 +30,8 @@ async function register(userData) {
     }
 }
 
-module.exports = { login, register };
+function createToken(id) {
+    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: 3600 });
+}
+
+module.exports = { login, register, createToken };

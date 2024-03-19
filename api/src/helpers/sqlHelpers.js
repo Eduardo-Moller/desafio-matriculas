@@ -38,7 +38,7 @@ async function insertUpdateTable(table, data) {
         sql = `INSERT INTO ${table} (${fields.join(', ')}) VALUES (${placeholders}) RETURNING *`;
     }
 
-    return await query(sql, values);
+    return (await query(sql, values))[0];
 }
 
 /**
