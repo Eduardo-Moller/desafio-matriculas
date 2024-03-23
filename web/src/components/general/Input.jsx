@@ -3,9 +3,17 @@ export default function Input({
   placeholder,
   handleChange,
   value,
+  int = false,
   error,
   ...otherProps
 }) {
+  const onChange = (value) => {
+    if (int) {
+      value = value.replace(/[^0-9]/g, "");
+    }
+    handleChange(value);
+  };
+
   return (
     <>
       <label htmlFor={otherProps.id} className="form-label">
@@ -16,7 +24,7 @@ export default function Input({
         className="form-control"
         id={otherProps.id}
         value={value}
-        onChange={(event) => handleChange(event.target.value)}
+        onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
         {...otherProps}
       />

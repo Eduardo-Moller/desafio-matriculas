@@ -2,7 +2,7 @@ export default function Button({ label, action, disabled, ...otherProps }) {
   return (
     <>
       <button
-        className="bgPrimaryUni text-white btn btn-lg btn-block w-100 mb-5"
+        className="bgPrimaryUni text-white btn btn-lg btn-block w-100"
         type="button"
         onClick={action}
         disabled={disabled}

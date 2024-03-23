@@ -68,20 +68,20 @@ async function selectTable(table, filters) {
  * @param {Object} filters Um objeto contendo os campos e valores a serem usados como filtros na consulta.
  * @returns {Promise} Uma promessa que será resolvida com o resultado da consulta.
  */
-async function selectAllTable(table, filters) {
+async function selectAllTable(table, filters, columns = '*') {
     if (!table) return [];
     if (table) table = 'public.' + table;
-    if (isEmpty(filters)) return await query(`SELECT * FROM ${table}`);
+    if (isEmpty(filters)) return await query(`SELECT ${columns} FROM ${table}`);
     const fields = Object.keys(filters);
     const values = Object.values(filters);
 
     let sql;
 
     if (table && (fields.length == 0 || values.length == 0)) {
-        sql = `SELECT * FROM ${table}`;
+        sql = `SELECT ${columns} FROM ${table}`;
     } else {
         const where = fields.map((field, index) => `${field} = $${index + 1}`).join(' AND ');
-        sql = `SELECT * FROM ${table} WHERE ${where}`;
+        sql = `SELECT ${columns} FROM ${table} WHERE ${where}`;
     }
 
     return await query(sql, values);

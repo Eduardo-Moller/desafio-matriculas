@@ -11,7 +11,7 @@ async function login(userData) {
     if (isEmpty(retrievedUser)) return { auth: false };
     const isValidPassword = bcrypt.compareSync(password, retrievedUser.password);
     if (!isEmpty(retrievedUser) && isValidPassword) {
-        const token = await createToken(retrievedUser.id);
+        const token = createToken(retrievedUser.id);
         const authenticatedUser = await getUserById(retrievedUser.id);
         return { auth: true, token, user: authenticatedUser };
     } else {

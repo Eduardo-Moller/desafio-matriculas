@@ -19,6 +19,42 @@ model users {
   login          String
   password       String
   type           String
+  classes        classes[]
+  updated        DateTime  @default(now())
+  created        DateTime  @default(now())
+  deleted        Boolean   @default(false)
+}
+
+model subjects {
+  id             Int       @id @default(autoincrement())
+  name           String
+  classes        classes[]
+  updated        DateTime  @default(now())
+  created        DateTime  @default(now())
+  deleted        Boolean   @default(false)
+}
+
+model classes {
+  id             Int       @id @default(autoincrement())
+  name           String
+  day            String
+  schedule       String
+  begin_time     DateTime  @map("begin_time")
+  end_time       DateTime  @map("end_time")
+  students_limit Int
+  subjects_id    Int
+  subjects       subjects  @relation(fields: [subjects_id], references: [id])
+  teacher_id     Int
+  teacher        users     @relation(fields: [teacher_id], references: [id])
+  updated        DateTime  @default(now())
+  created        DateTime  @default(now())
+  deleted        Boolean   @default(false)
+}
+
+model classes_students {
+  id             Int       @id @default(autoincrement())
+  classes_id     Int
+  users_id       Int
   updated        DateTime  @default(now())
   created        DateTime  @default(now())
   deleted        Boolean   @default(false)

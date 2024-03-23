@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import Button from "../general/Button";
-import Input from "../general/Input";
+import Button from "../General/Button";
+import Input from "../General/Input";
+import { authLogin } from "../../services/auth";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function LoginForm() {
-  const [login, setLogin] = useState("");
+  const navigate = useNavigate();
+  const [login, setLogin] = useState("Adimin");
   const [loginError, setLoginError] = useState(false);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("123!@#");
   const [passwordError, setPasswordError] = useState(false);
 
   const handleLogin = async () => {
@@ -22,7 +26,25 @@ export default function LoginForm() {
 
     if (loginError || passwordError) return;
 
-    console.log(login, password);
+    try {
+      await authLogin({ login, password });
+      navigate("/");
+    } catch (error) {
+      switch (error.response.status) {
+        case 401:
+          toast.error("Usuário ou senha inválidos");
+          break;
+        case 400:
+          toast.error("Requisição inválida");
+          break;
+        case 500:
+          toast.error("Erro interno no servidor");
+          break;
+        default:
+          toast.error("Erro desconhecido");
+          break;
+      }
+    }
   };
 
   return (
@@ -55,8 +77,9 @@ export default function LoginForm() {
           />
         </div>
 
-        <Button label={"Login"} action={handleLogin} />
-
+        <div className="w-100 mb-5">
+          <Button label={"Login"} action={handleLogin} />
+        </div>
         <p className="mb-5 pb-lg-2 textPrimaryUni">
           Ainda não possui uma conta?{" "}
           <a href="https://ead.unisinos.br" target="_blank">
