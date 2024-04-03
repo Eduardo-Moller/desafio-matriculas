@@ -22,7 +22,7 @@ export default function Home() {
         <div className="row">
           <HomeItem
             label="Realizar matrícula"
-            isPermitted={user.type === "student"}
+            isPermitted={user.type === "student" && user.enrolled === false}
             action={() => navigate("/enrollment")}
             icon={<BsBagPlusFill {...iconProps} />}
           />

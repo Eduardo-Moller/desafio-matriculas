@@ -11,7 +11,6 @@ const { isEmpty } = require('./helpers');
  * @returns {Promise} Uma promessa que será resolvida com o resultado da operação de inserção ou atualização.
  */
 async function insertUpdateTable(table, data) {
-    if (table) table = 'public.' + table;
     const fields = Object.keys(data);
     const values = Object.values(data);
 
@@ -22,6 +21,7 @@ async function insertUpdateTable(table, data) {
         const id = values[idIndex];
 
         const checkField = await selectTable(table, { id });
+        if (table) table = 'public.' + table;
         if (!checkField) return {};
         if (checkField && checkField.updated) {
             fields.push('updated');
@@ -34,6 +34,7 @@ async function insertUpdateTable(table, data) {
         sql = `UPDATE ${table} SET ${updates} WHERE id = $${fields.length + 1} RETURNING *`;
         values.push(id);
     } else {
+        if (table) table = 'public.' + table;
         const placeholders = values.map((value, index) => `$${index + 1}`).join(', ');
         sql = `INSERT INTO ${table} (${fields.join(', ')}) VALUES (${placeholders}) RETURNING *`;
     }
@@ -66,12 +67,14 @@ async function selectTable(table, filters) {
  * Constrói uma consulta SQL dinâmica com base nos campos e valores dos filtros.
  * @param {string} table O nome da tabela onde a consulta será realizada.
  * @param {Object} filters Um objeto contendo os campos e valores a serem usados como filtros na consulta.
+ * @param {string} columns Uma string representando os nomes das colunas a serem selecionadas. Padrão é '*' (todas as colunas).
+ * @param {Array} order Um array contendo os nomes dos campos pelos quais os resultados devem ser ordenados.
  * @returns {Promise} Uma promessa que será resolvida com o resultado da consulta.
  */
-async function selectAllTable(table, filters, columns = '*') {
+async function selectAllTable(table, filters, columns = '*', order = []) {
     if (!table) return [];
     if (table) table = 'public.' + table;
-    if (isEmpty(filters)) return await query(`SELECT ${columns} FROM ${table}`);
+    if (isEmpty(filters)) return await query(`SELECT ${columns} FROM ${table}` + (order.length > 0 ? ` ORDER BY ${order.join(', ')}` : ''));
     const fields = Object.keys(filters);
     const values = Object.values(filters);
 
@@ -82,6 +85,10 @@ async function selectAllTable(table, filters, columns = '*') {
     } else {
         const where = fields.map((field, index) => `${field} = $${index + 1}`).join(' AND ');
         sql = `SELECT ${columns} FROM ${table} WHERE ${where}`;
+    }
+
+    if (order.length > 0) {
+        sql += ` ORDER BY ${order.join(', ')}`;
     }
 
     return await query(sql, values);

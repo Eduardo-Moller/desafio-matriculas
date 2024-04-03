@@ -5,15 +5,15 @@ export async function getUsers(filters = {}) {
     var strFilters = "?";
 
     if (filters?.type) {
-      strFilters += "type=" + filters.type + "&";
+      strFilters += `type= ${filters.type} &`;
     }
 
     if (filters?.name) {
-      strFilters += "name=" + filters.name + "&";
+      strFilters += `name= ${filters.name} &`;
     }
 
     if (filters?.id) {
-      strFilters += "id=" + filters.id + "&";
+      strFilters += `id= ${filters.id} &`;
     }
 
     const { status, data } = await api.get("/users/" + strFilters);

@@ -28,7 +28,6 @@ export default function ClassesForm() {
     { value: "Quarta-feira", label: "Quarta-feira" },
     { value: "Quinta-feira", label: "Quinta-feira" },
     { value: "Sexta-feira", label: "Sexta-feira" },
-    { value: "Sábado", label: "Sábado" },
   ];
 
   const schedules = [
@@ -70,6 +69,12 @@ export default function ClassesForm() {
       toast.error("Preencha todos os campos e tente novamente");
       return;
     }
+
+    if (begin_time >= end_time) {
+      toast.error("Horário de início deve ser menor que o horário de término");
+      return;
+    }
+
     try {
       const data = {
         name,
@@ -107,7 +112,6 @@ export default function ClassesForm() {
           );
           break;
       }
-      console.log(error);
     }
   };
 

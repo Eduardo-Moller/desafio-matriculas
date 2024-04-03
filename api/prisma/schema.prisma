@@ -20,6 +20,7 @@ model users {
   password       String
   type           String
   classes        classes[]
+  enrolled       Boolean   @default(false)
   updated        DateTime  @default(now())
   created        DateTime  @default(now())
   deleted        Boolean   @default(false)
@@ -39,8 +40,8 @@ model classes {
   name           String
   day            String
   schedule       String
-  begin_time     DateTime  @map("begin_time")
-  end_time       DateTime  @map("end_time")
+  begin_time     DateTime  @map("begin_time") @db.Time(4)
+  end_time       DateTime  @map("end_time") @db.Time(4)
   students_limit Int
   subjects_id    Int
   subjects       subjects  @relation(fields: [subjects_id], references: [id])

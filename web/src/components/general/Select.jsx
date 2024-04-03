@@ -8,6 +8,7 @@ export default function SelectComponent({
   value,
   fieldOptions,
   error,
+  isMulti = false,
   ...otherProps
 }) {
   return (
@@ -22,6 +23,7 @@ export default function SelectComponent({
         onChange={(selectedOption) => handleChange(selectedOption)}
         value={value}
         noOptionsMessage={() => "Nenhuma opção encontrada"}
+        isMulti={isMulti}
         isClearable={true}
         {...otherProps}
       />

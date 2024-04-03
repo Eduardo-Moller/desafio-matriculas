@@ -7,7 +7,8 @@ async function getUserById(userId) {
         SELECT
             users.id,
             users.name,
-            users.type
+            users.type,
+            users.enrolled
         FROM
             public.users
         WHERE
