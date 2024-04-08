@@ -1,5 +1,5 @@
 import React from "react";
-import SelectComponent from "../General/Select";
+import SelectComponent from "../general/Select";
 
 export default function DayItem({ day, handleSelect, values }) {
   return (

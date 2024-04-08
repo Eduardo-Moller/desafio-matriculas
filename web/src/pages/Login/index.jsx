@@ -1,6 +1,6 @@
-import Logo from "../../components/General/Logo";
+import Logo from "../../components/general/Logo";
 import LoginForm from "../../components/Login/LoginForm";
-import FullScreen from "../../components/General/FullScreen";
+import FullScreen from "../../components/general/FullScreen";
 export default function Login() {
   return (
     <FullScreen>

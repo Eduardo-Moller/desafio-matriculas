@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { getUser } from "../../services/auth";
 import toast from "react-hot-toast";
 import DayItem from "./DayItem";
-import Button from "../General/Button";
+import Button from "../general/Button";
 import { getUsers } from "../../services/users";
 
 export default function EnrollmentList() {
@@ -27,7 +27,9 @@ export default function EnrollmentList() {
 
   const fetchData = async () => {
     const classes = await getClasses();
-    if (isEmpty(classes)) toast.error("Nenhuma turma aberta encontrada");
+
+    if (!classes || classes.length === 0)
+      return toast.error("Nenhuma turma aberta encontrada");
 
     const dataClasses = [];
 

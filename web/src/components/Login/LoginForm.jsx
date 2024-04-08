@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Button from "../General/Button";
-import Input from "../General/Input";
+import Button from "../general/Button";
+import Input from "../general/Input";
 import { authLogin } from "../../services/auth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";

@@ -1,6 +1,6 @@
 import EnrollmentList from "../../components/Enrollment/EnrollmentList";
-import FullScreen from "../../components/General/FullScreen";
-import Header from "../../components/General/Header";
+import FullScreen from "../../components/general/FullScreen";
+import Header from "../../components/general/Header";
 
 export default function Enrollment() {
   return (

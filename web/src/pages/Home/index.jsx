@@ -1,6 +1,6 @@
-import FullScreen from "../../components/General/FullScreen";
-import Header from "../../components/General/Header";
-import HomeItem from "../../components/General/HomeItem";
+import FullScreen from "../../components/general/FullScreen";
+import Header from "../../components/general/Header";
+import HomeItem from "../../components/general/HomeItem";
 import { BsBagPlusFill, BsClockFill, BsBookFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../../services/auth";

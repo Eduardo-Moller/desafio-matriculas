@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Button from "../General/Button";
-import Input from "../General/Input";
+import Button from "../general/Button";
+import Input from "../general/Input";
 import { useNavigate } from "react-router-dom";
-import SelectComponent from "../General/Select";
+import SelectComponent from "../general/Select";
 import { getUsers } from "../../services/users";
 import { getSubjects } from "../../services/subjects";
 import { postClasses } from "../../services/classes";

@@ -3,6 +3,7 @@ import { getUser } from "../../services/auth";
 import { getEnrollments } from "../../services/classes";
 import { useNavigate } from "react-router-dom";
 import DaySchedule from "./DaySchedule";
+import { isEmpty } from "../../services/utils";
 
 export default function ScheduleList() {
   const navigate = useNavigate();
@@ -24,6 +25,8 @@ export default function ScheduleList() {
   const fetchData = async () => {
     const user = await getUser();
     const enroll = await getEnrollments({ users_id: user.id });
+
+    if (!enroll || enroll.length === 0) return;
 
     const data = [];
     possibleDays.forEach((day) => {
