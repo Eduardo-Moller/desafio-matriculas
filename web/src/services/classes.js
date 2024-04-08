@@ -47,11 +47,11 @@ export async function getEnrollments(filters = {}) {
     var strFilters = "?";
 
     if (filters?.id) {
-      strFilters += `id=${filters.id} &`;
+      strFilters += `id=${filters.id}&`;
     }
 
     if (filters?.users_id) {
-      strFilters += `users_id= ${filters.users_id} &`;
+      strFilters += `users_id= ${filters.users_id}&`;
     }
 
     const { status, data } = await api.get("/classes/enroll" + strFilters);

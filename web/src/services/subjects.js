@@ -5,11 +5,11 @@ export async function getSubjects(filters = {}) {
     var strFilters = "?";
 
     if (filters?.name) {
-      strFilters += `name=${filters.name} &`;
+      strFilters += `name=${filters.name}&`;
     }
 
     if (filters?.id) {
-      strFilters += `id= ${filters.id} &`;
+      strFilters += `id=${filters.id}&`;
     }
 
     const { status, data } = await api.get("/subjects/" + strFilters);
