@@ -7,9 +7,9 @@ import toast from "react-hot-toast";
 
 export default function LoginForm() {
   const navigate = useNavigate();
-  const [login, setLogin] = useState("Admin");
+  const [login, setLogin] = useState("");
   const [loginError, setLoginError] = useState(false);
-  const [password, setPassword] = useState("123!@#");
+  const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
 
   const handleLogin = async () => {
