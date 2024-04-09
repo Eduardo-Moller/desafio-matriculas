@@ -23,6 +23,7 @@ jobs:
 
       - name: npm install, and start
         run: |
+          cd api
           npm install
           npm start
       
